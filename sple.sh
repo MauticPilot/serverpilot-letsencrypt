@@ -62,17 +62,17 @@ elif [ "$theAction" == "install" ]; then
 		exit
 	fi
 	sudo service nginx-sp stop
+	#echo -e "\e[32mChecks passed, press enter to continue\e[39m"
 	if [ "$domainType" == "main" ]; then
-		thecommand="letsencrypt certonly --register-unsafely-without-email --agree-tos -d $domainName -d www.$domainName"
-	elif [ "$domainType" == "sub" ]; then
-		thecommand="letsencrypt certonly --register-unsafely-without-email --agree-tos -d $domainName"
-		letsencrypt certonly --register-unsafely-without-email --agree-tos -d $domainName
+		thecommand="letsencrypt certonly --register-unsafely-without-email --agree-tos --non-interactive -d $domainName -d www.$domainName"
+	elif [[ "$domainType" == "sub" ]]; then
+		thecommand="letsencrypt certonly --register-unsafely-without-email --agree-tos --non-interactive -d $domainName"
 	else
 		echo -e "\e[31mDomain type not provided. Should be either main or sub\e[39m"
 		exit
 	fi
 	output=$(eval $thecommand 2>&1) | xargs
-echo "$output"
+
 	if [[ "$output" == *"too many requests"* ]]; then
 		echo "Let's Encrypt SSL limit reached. Please wait for a few days before obtaining more SSLs for $domainName"
 	elif [[ "$output" == *"Congratulations"* ]]; then
