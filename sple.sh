@@ -62,7 +62,6 @@ elif [ "$theAction" == "install" ]; then
 		exit
 	fi
 	sudo service nginx-sp stop
-	echo -e "\e[32mChecks passed, press enter to continue\e[39m"
 	if [ "$domainType" == "main" ]; then
 		thecommand="letsencrypt certonly --register-unsafely-without-email --agree-tos -d $domainName -d www.$domainName"
 	elif [[ "$domainType" == "sub" ]]; then
