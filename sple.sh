@@ -64,9 +64,9 @@ elif [ "$theAction" == "install" ]; then
 	sudo service nginx-sp stop
 	#echo -e "\e[32mChecks passed, press enter to continue\e[39m"
 	if [ "$domainType" == "main" ]; then
-		thecommand="letsencrypt certonly --register-unsafely-without-email --agree-tos --non-interactive -d $domainName -d www.$domainName"
+		thecommand="letsencrypt certonly --register-unsafely-without-email --agree-tos --non-interactive -d $domainName -d www.$domainName --authenticator standalone --installer apache"
 	elif [[ "$domainType" == "sub" ]]; then
-		thecommand="letsencrypt certonly --register-unsafely-without-email --agree-tos --non-interactive -d $domainName"
+		thecommand="letsencrypt certonly --register-unsafely-without-email --agree-tos --non-interactive -d $domainName --authenticator standalone --installer apache"
 	else
 		echo -e "\e[31mDomain type not provided. Should be either main or sub\e[39m"
 		exit
