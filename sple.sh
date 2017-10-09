@@ -66,6 +66,7 @@ elif [ "$theAction" == "install" ]; then
 		thecommand="letsencrypt certonly --register-unsafely-without-email --agree-tos -d $domainName -d www.$domainName"
 	elif [ "$domainType" == "sub" ]; then
 		thecommand="letsencrypt certonly --register-unsafely-without-email --agree-tos -d $domainName"
+		letsencrypt certonly --register-unsafely-without-email --agree-tos -d $domainName
 	else
 		echo -e "\e[31mDomain type not provided. Should be either main or sub\e[39m"
 		exit
