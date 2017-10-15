@@ -71,7 +71,7 @@ elif [ "$theAction" == "install" ]; then
 		echo -e "\e[31mDomain type not provided. Should be either main or sub\e[39m"
 		exit
 	fi
-	output=$(eval $thecommand) | xargs
+	output="$(eval $thecommand 2>&1) | xargs"
 
 	if [[ "$output" == *"too many requests"* ]]; then
 		echo "Let's Encrypt SSL limit reached. Please wait for a few days before obtaining more SSLs for $domainName"
